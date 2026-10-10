@@ -1,0 +1,107 @@
+/*******************************************************************************
+ * Syntax highlighting palette for code blocks (Prism token classes, which Distill applies in the browser).
+ * Overrides the jekyll-pygments-themes stylesheets for both light and dark mode.
+ ******************************************************************************/
+
+:root {
+  --syn-bg: #f6f8fa;
+  --syn-fg: #24292e;
+  --syn-comment: #6a737d;
+  --syn-keyword: #d73a49;
+  --syn-builtin: #005cc5;
+  --syn-function: #6f42c1;
+  --syn-class: #b08800;
+  --syn-string: #0a7d3e;
+  --syn-number: #c4570a;
+  --syn-operator: #d73a49;
+  --syn-decorator: #6f42c1;
+}
+
+html[data-theme="dark"] {
+  --syn-bg: #282c34;
+  --syn-fg: #abb2bf;
+  --syn-comment: #7f848e;
+  --syn-keyword: #c678dd;
+  --syn-builtin: #e5c07b;
+  --syn-function: #61afef;
+  --syn-class: #e5c07b;
+  --syn-string: #98c379;
+  --syn-number: #d19a66;
+  --syn-operator: #56b6c2;
+  --syn-decorator: #61afef;
+}
+
+pre.highlight {
+  background-color: var(--syn-bg) !important;
+  color: var(--syn-fg);
+  tab-size: 4;
+  -moz-tab-size: 4;
+
+  code {
+    color: var(--syn-fg);
+    background-color: transparent;
+  }
+
+  // Plain names and anything not listed below.
+  code span {
+    color: var(--syn-fg) !important;
+    font-weight: normal !important;
+  }
+
+  .token.punctuation,
+  .token.property,
+  .token.variable {
+    color: var(--syn-fg) !important;
+  }
+
+  .token.comment,
+  .token.prolog,
+  .token.doctype,
+  .token.cdata {
+    color: var(--syn-comment) !important;
+    font-style: italic;
+  }
+
+  .token.keyword,
+  .token.boolean,
+  .token.important {
+    color: var(--syn-keyword) !important;
+  }
+
+  .token.builtin,
+  .token.constant,
+  .token.symbol {
+    color: var(--syn-builtin) !important;
+  }
+
+  .token.function {
+    color: var(--syn-function) !important;
+  }
+
+  .token.class-name,
+  .token.namespace {
+    color: var(--syn-class) !important;
+  }
+
+  .token.decorator,
+  .token.annotation {
+    color: var(--syn-decorator) !important;
+  }
+
+  .token.string,
+  .token.char,
+  .token.triple-quoted-string,
+  .token.string-interpolation,
+  .token.regex,
+  .token.attr-value {
+    color: var(--syn-string) !important;
+  }
+
+  .token.number {
+    color: var(--syn-number) !important;
+  }
+
+  .token.operator {
+    color: var(--syn-operator) !important;
+  }
+}

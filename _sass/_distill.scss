@@ -6,6 +6,16 @@ d-byline {
   border-top-color: var(--global-divider-color) !important;
 }
 
+// No affiliations: hide that column so only "Authors" and "Published" are shown.
+d-byline .authors-affiliations {
+  grid-template-columns: 1fr;
+
+  h3:nth-of-type(2),
+  p.affiliation {
+    display: none;
+  }
+}
+
 d-byline h3 {
   color: var(--global-text-color) !important;
 }
@@ -48,10 +58,140 @@ d-article {
   b i {
     display: inline;
   }
+  .katex,
+  .katex *,
+  .katex-display,
+  mjx-container,
+  mjx-container * {
+    color: var(--global-text-color) !important;
+  }
+  mjx-container svg {
+    fill: currentColor;
+  }
   blockquote {
     border-left: 2px solid var(--global-theme-color) !important;
   }
 
+  // Stretch a very wide figure vertically within the text column: set --img-height on the wrapper.
+  .fig-fixed-height img {
+    height: var(--img-height) !important;
+    width: 100%;
+    object-fit: fill;
+  }
+
+  // Copy-code button (assets/js/copy_code.js): keep it faintly visible so it works without hover.
+  .code-display-wrapper {
+    margin-bottom: 20px;
+    pre {
+      margin-bottom: 0;
+    }
+    .copy {
+      opacity: 0.6;
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: 0.2rem 0.5rem;
+      transition: opacity 0.15s ease;
+    }
+    &:hover .copy,
+    .copy:focus-visible {
+      opacity: 1;
+    }
+  }
+
+  figure figcaption {
+    color: var(--global-text-color) !important;
+    text-align: center;
+  }
+
+  // al-folio callouts ({: .block-tip }, .block-warning, .block-danger).
+  // Each callout sets --callout (accent), --callout-bg, --callout-text for light and dark mode.
+  blockquote.block-tip,
+  blockquote.block-warning,
+  blockquote.block-danger {
+    margin: 1.5rem 0;
+    padding: 0.9rem 1.2rem 0.9rem 1.1rem;
+    background-color: var(--callout-bg) !important;
+    border: 1px solid var(--callout-border);
+    border-left: 4px solid var(--callout) !important;
+    border-radius: 8px;
+
+    p,
+    em,
+    strong,
+    code {
+      color: var(--callout-text) !important;
+      font-size: 1rem;
+      font-style: normal;
+      line-height: 1.6;
+      margin: 0;
+    }
+    em {
+      font-style: italic;
+    }
+    code {
+      background-color: transparent;
+    }
+
+    // The "##### Note" line becomes a small uppercase label.
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: var(--callout) !important;
+      font-size: 0.78rem;
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin: 0 0 0.35rem;
+      text-transform: uppercase;
+    }
+  }
+
+  blockquote.block-tip {
+    --callout: #2f9e6f;
+    --callout-bg: #eaf7f1;
+    --callout-border: #cfeadf;
+    --callout-text: #1f4d3a;
+  }
+  blockquote.block-warning {
+    --callout: #c77d0a;
+    --callout-bg: #fff6e5;
+    --callout-border: #f5e1b8;
+    --callout-text: #5c3d05;
+  }
+  blockquote.block-danger {
+    --callout: #d64545;
+    --callout-bg: #fdeeee;
+    --callout-border: #f6cfcf;
+    --callout-text: #6b1f1f;
+  }
+
+}
+
+html[data-theme="dark"] d-article {
+  blockquote.block-tip {
+    --callout: #4cc38a;
+    --callout-bg: rgba(76, 195, 138, 0.1);
+    --callout-border: rgba(76, 195, 138, 0.25);
+    --callout-text: #d3e9de;
+  }
+  blockquote.block-warning {
+    --callout: #e5a937;
+    --callout-bg: rgba(229, 169, 55, 0.1);
+    --callout-border: rgba(229, 169, 55, 0.25);
+    --callout-text: #efe0c0;
+  }
+  blockquote.block-danger {
+    --callout: #f06b6b;
+    --callout-bg: rgba(240, 107, 107, 0.1);
+    --callout-border: rgba(240, 107, 107, 0.25);
+    --callout-text: #f1d3d3;
+  }
+}
+
+d-article {
   // Style taken from code blocks
   details {
     color: var(--global-text-color);
@@ -77,7 +217,9 @@ d-article {
   d-contents {
     align-self: start;
     grid-column: 1 / 4;
-    grid-row: auto / span 4;
+    // Span enough rows to hold the (tall) contents list, otherwise the grid stretches the
+    // first few rows and opens large gaps between the opening paragraphs and headings.
+    grid-row: auto / span 14;
     justify-self: end;
     margin-top: 0em;
     padding-left: 2em;
