@@ -373,15 +373,35 @@ ul.task-list input[type="checkbox"] {
   text-align: center;
 
   .contact-icons {
-    font-size: 4rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.9rem;
+    margin: 1.5rem 0 1rem;
+    font-size: 1.25rem;
 
     a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.6rem;
+      height: 2.6rem;
+      border: 1px solid var(--global-divider-color);
+      border-radius: 50%;
+      text-decoration: none;
+      transition:
+        border-color 0.2s ease-in-out,
+        transform 0.2s ease-in-out;
+
       i::before {
-        color: var(--global-text-color);
-        transition-property: all 0.2s ease-in-out;
+        color: var(--global-text-color-light);
+        transition: color 0.2s ease-in-out;
       }
 
       &:hover {
+        border-color: var(--global-theme-color);
+        transform: translateY(-2px);
+
         i::before {
           color: var(--global-theme-color);
         }

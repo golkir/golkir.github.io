@@ -8,7 +8,8 @@ d-byline {
 
 // No affiliations: hide that column so only "Authors" and "Published" are shown.
 d-byline .authors-affiliations {
-  grid-template-columns: 1fr;
+  // !important: Distill's own inline style has the same specificity and can load after this file.
+  grid-template-columns: 1fr !important;
 
   h3:nth-of-type(2),
   p.affiliation {
@@ -101,6 +102,9 @@ d-article {
   figure figcaption {
     color: var(--global-text-color) !important;
     text-align: center;
+    // The figure's own bottom margin plus the next heading's top margin already give enough space
+    // (grid items do not collapse margins), so don't add the theme's 24px on top.
+    margin-bottom: 0 !important; // beats the theme's `.caption { margin-bottom: 1.5rem }`
   }
 
   // al-folio callouts ({: .block-tip }, .block-warning, .block-danger).
